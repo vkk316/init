@@ -1,25 +1,30 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input, OnChanges, OnInit, SimpleChanges } from '@angular/core';
 
 @Component({
   selector: 'app-child',
   templateUrl: './child.component.html',
   styleUrls: ['./child.component.css']
 })
-export class ChildComponent implements OnInit {
-  _counter = 0;
+export class ChildComponent implements OnInit, OnChanges {
+  @Input() counter = 0;
   constructor() { }
 
   ngOnInit(): void {
   }
 
-  @Input()
-  set counter(newValue: number){
-    console.log('old, newValue', this._counter, newValue)
-    this._counter = newValue
+  ngOnChanges(changes: SimpleChanges): void {
+      let c = changes
+      console.log(c['counter'])
   }
 
-  get counter(){
-    return this._counter;
-  }
+  // @Input()
+  // set counter(newValue: number){
+  //   console.log('old, newValue', this._counter, newValue)
+  //   this._counter = newValue
+  // }
+
+  // get counter(){
+  //   return this._counter;
+  // }
 
 }
