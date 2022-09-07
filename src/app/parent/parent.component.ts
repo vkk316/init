@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
+import { ChildComponent } from '../child/child.component';
 
 @Component({
   selector: 'app-parent',
@@ -7,14 +8,17 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ParentComponent implements OnInit {
 
-  p_counter = 0
+  @ViewChild(ChildComponent, {static: false})
+  child: ChildComponent | undefined // พ่อเกิดลูกไม่เกิดทันที
   constructor() { }
 
   ngOnInit(): void {
   }
 
   update(){
-    this.p_counter += 1
+    if(this.child){
+      this.child.counter += 1;
+    }
   }
 
 
